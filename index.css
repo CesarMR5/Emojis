@@ -67,6 +67,12 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1em;
+
+  & p {
+    text-align: center;
+    color: var(--delete-color);
+    font-weight: bold;
+  }
 }
 
 /* === User Section === */

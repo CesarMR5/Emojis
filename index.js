@@ -3,6 +3,8 @@
 const viewLoggedOut = document.getElementById("logged-out-view");
 const viewLoggedIn = document.getElementById("logged-in-view");
 
+const authFields = document.getElementById("auth-fields-and-buttons");
+
 const signInWithGoogleButtonEl = document.getElementById(
   "sign-in-with-google-btn"
 );
@@ -24,6 +26,9 @@ const postButtonEl = document.getElementById("post-btn");
 
 const postsEl = document.getElementById("posts");
 
+const email = "cesar@gmail.com";
+const password = "123456";
+
 /* == UI - Event Listeners == */
 
 for (let moodEmojiEl of moodEmojiEls) {
@@ -31,6 +36,10 @@ for (let moodEmojiEl of moodEmojiEls) {
 }
 
 postButtonEl.addEventListener("click", postButtonPressed);
+
+signInButtonEl.addEventListener("click", login);
+
+signOutButtonEl.addEventListener("click", logout);
 
 /* === State === */
 
@@ -41,17 +50,51 @@ let moodState = 0;
 const collectionName = "posts";
 
 /* === Main Code === */
-
-console.log("Iniciando");
-showLoggedInView();
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Iniciando");
+  showLoggedOutView();
+  // showLoggedInView() -> esto es lo que estaba antes en el codigo y hacia que se mostrara la otra pantalla
+});
 
 /* === Functions === */
 
 /* = Functions - Firebase - Authentication = */
+function login() {
+  if (emailInputEl.value.trim() === "" || passwordInputEl.value.trim() === "") {
+    showError("Ingresar un email o password validos");
+    return;
+  }
+
+  if (
+    emailInputEl.value.trim() !== email ||
+    passwordInputEl.value.trim() !== password
+  ) {
+    showError("Correo o contraseña incorrectos");
+    return;
+  }
+
+  showLoggedInView();
+  emailInputEl.value = "";
+  passwordInputEl.value = "";
+}
 
 /* = Functions - Firebase - Cloud Firestore = */
+function logout() {
+  showLoggedOutView();
+}
 
 /* == Functions - UI Functions == */
+
+function showError(msg) {
+  const p = document.createElement("p");
+  p.innerText = msg;
+
+  authFields.appendChild(p);
+
+  setInterval(() => {
+    authFields.removeChild(p);
+  }, 3000);
+}
 
 function renderPost(postsEl, postData) {
   postsEl.innerHTML += `

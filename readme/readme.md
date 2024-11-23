@@ -1,1 +1,0 @@
-# Aquí vamos a ir registrando los errores y cambios

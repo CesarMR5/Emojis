@@ -68,10 +68,31 @@ section {
   flex-direction: column;
   gap: 1em;
 
+  /* estilos para el mensaje de error */
   & p {
     text-align: center;
     color: var(--delete-color);
     font-weight: bold;
+  }
+}
+
+/* estilos para el boton de eliminar */
+.delete {
+  padding: 2px;
+  border-radius: 50%;
+  background-color: var(--delete-color);
+  display: flex;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
 
